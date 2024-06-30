@@ -1,0 +1,45 @@
+
+    <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+  <rect width="50" height="50" fill="none" />
+  <text
+    x="50%"
+    y="50%"
+    dy="-0.5em"
+    textAnchor="middle"
+    fontFamily="Arial, sans-serif"
+    fontSize="14"
+    fontWeight="bold"
+    fill="#6225c5"
+  >
+    CHAI&STUDY
+  </text>
+</svg>
+
+<!-- <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+      <rect width="50" height="50" fill="none" />
+      <text
+        x="50%"
+        y="40%"
+        textAnchor="middle"
+        fontFamily="Arial, sans-serif"
+        fontSize="24"
+        fontWeight="bold"
+        fill="#6225c5"
+        background="none"
+      >
+        CHAI&STUDY
+      </text>
+      <!-- <text
+        x="50%"
+        y="60%"
+        textAnchor="middle"
+        fontFamily="Arial, sans-serif"
+        fontSize="12"
+        fill="#6225c5"
+      >
+        Fuel Your Brain with Chai & Study!
+      </text> -->
+    </svg> -->
+
+
+

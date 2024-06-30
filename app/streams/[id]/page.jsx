@@ -3,15 +3,29 @@ import prisma from '@/lib/prisma'
 import { Card } from '@/components/ui/card';
 import Link from 'next/link';
 import { ChevronRightIcon } from 'lucide-react';
+
+
+async function getcurrentCourse(id) {
+    let currentCourse
+    try {
+        currentCourse = await prisma.Course.findUnique({
+            where: { id: id },
+            include: {
+                Stream: true,
+            },
+        });
+    } catch (error) {
+        console.log(error)
+    } finally {
+        await prisma.$disconnect()
+    }
+    return (currentCourse)
+}
 export async function generateMetadata({ params }) {
     const courseId = params.id;
 
-    const currentCourse = await prisma.Course.findUnique({
-        where: { id: courseId },
-        include: {
-            Stream: true,
-        },
-    });
+    const currentCourse = await getcurrentCourse(courseId)
+
 
     return {
         title: currentCourse.name + " - MDU Previous Years Question Papers Download | last-night-paper.com",
@@ -22,12 +36,7 @@ export async function generateMetadata({ params }) {
 async function page({ params }) {
     const courseId = params.id
 
-    const currentCourse = await prisma.Course.findUnique({
-        where: { id: courseId },
-        include: {
-            Stream: true
-        }
-    })
+    const currentCourse = await getcurrentCourse(courseId)
     return (
         <div className="mb-96">
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -36,7 +45,7 @@ async function page({ params }) {
 
                         <Card key={course.id}
                             className="relative overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
-                            <Link href={`/streams/${course.id}`} className="absolute inset-0 z-10" prefetch={false}>
+                            <Link href={`/subjects/${course.id}`} className="absolute inset-0 z-10" prefetch={false}>
                                 <span className="sr-only">View subject</span>
                             </Link>
                             <div className="p-6 bg-background">
