@@ -1,0 +1,55 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Course {
+  id          String    @id
+  name        String    @unique
+  description String?
+  Stream      Stream[]  @relation("CourseStream")
+  Subject     Subject[]
+}
+
+model QuestionPaper {
+  id          String    @id
+  name        String    @unique
+  description String?
+  uploaderId  String?
+  views       Int       @default(0)
+  year        String?
+  link        String?
+  Uploader    Uploader? @relation(fields: [uploaderId], references: [id])
+  Subject     Subject[]
+}
+
+model Stream {
+  id          String    @id
+  name        String    @unique
+  description String?
+  Course      Course[]  @relation("CourseStream")
+  Subject     Subject[] @relation("SubjectStream")
+}
+
+model Subject {
+  id            String          @id
+  name          String          @unique
+  description   String?
+  credits       Int?
+  year          String?
+  Course        Course[]
+  QuestionPaper QuestionPaper[]
+  Stream        Stream[]        @relation("SubjectStream")
+}
+
+model Uploader {
+  id            String          @id
+  name          String
+  email         String          @unique
+  QuestionPaper QuestionPaper[]
+}
