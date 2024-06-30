@@ -5,7 +5,7 @@ import Link from "next/link";
 import prisma from "@/lib/prisma";
 export async function generateMetadata() {
   return {
-    title: 'Home Page || Last Night Paper',
+    title: 'Home Page || chai & study',
     description: "Access comprehensive study material and previous year question papers for MDU University across all streams, including CSE, Civil, and more. Boost your exam preparation with our extensive"
   }
 }

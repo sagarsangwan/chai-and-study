@@ -30,7 +30,7 @@ export async function generateMetadata({ params }) {
 
 
     return {
-        title: curentStream.name + " - MDU Previous Years Question Papers Download | last-night-papercom",
+        title: curentStream.name + " - MDU Previous Years Question Papers Download | chai-and-study.com",
         description: curentStream.description,
     };
 }

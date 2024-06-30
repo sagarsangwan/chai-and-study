@@ -10,7 +10,7 @@ export function HeroSection() {
           <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Get Your Question Papers</h1>
           <p
             className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            LastNightPaper is your one-stop solution for accessing previous year question papers. Ace your exams with
+            Chai & Study is your one-stop solution for accessing previous year question papers. Ace your exams with
             our comprehensive collection of curated papers.
           </p>
           <Link

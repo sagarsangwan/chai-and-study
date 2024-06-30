@@ -28,7 +28,7 @@ export async function generateMetadata({ params }) {
 
 
     return {
-        title: currentCourse.name + " - MDU Previous Years Question Papers Download | last-night-paper.com",
+        title: currentCourse.name + " - MDU Previous Years Question Papers Download | chai-and-study.com",
         description: currentCourse.description,
     };
 }
