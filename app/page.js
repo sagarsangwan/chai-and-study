@@ -9,8 +9,10 @@ import HomeFeatures from "@/components/component/home-features";
 export default async function Home() {
   const allCourses = await prisma.Course.findMany()
   return (
-    <div className="mb-96">
-      <HeroSection />
+    <div className="mb-96 ">
+      <div>
+        <HeroSection />
+      </div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {allCourses ?
           allCourses.map((course) => (
@@ -39,9 +41,9 @@ export default async function Home() {
           <div>no courses</div>
         }
       </div>
-
-      <HomeFeatures />
-
+      <div className="mt-14">
+        <HomeFeatures />
+      </div>
     </div>
   );
 }
