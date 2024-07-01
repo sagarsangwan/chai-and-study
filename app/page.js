@@ -3,18 +3,12 @@ import { ChevronRightIcon } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import prisma from "@/lib/prisma";
-export async function generateMetadata() {
-  return {
-    title: 'Home Page || chai & study',
-    description: "Access comprehensive study material and previous year question papers for MDU University across all streams, including CSE, Civil, and more. Boost your exam preparation with our extensive"
-  }
-}
+import HomeFeatures from "@/components/component/home-features";
+
 
 export default async function Home() {
   const allCourses = await prisma.Course.findMany()
-  // console.log(allCourses)
   return (
-
     <div className="mb-96">
       <HeroSection />
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -43,9 +37,10 @@ export default async function Home() {
             </Card>
           )) :
           <div>no courses</div>
-        }</div>
+        }
+      </div>
 
-
+      <HomeFeatures />
 
     </div>
   );
