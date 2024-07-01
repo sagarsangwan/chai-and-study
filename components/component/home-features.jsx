@@ -30,7 +30,7 @@ function HomeFeatures() {
         )
     }
     return (
-        <div className="grid gap-10 px-4 md:px-6 md:grid-cols-3">
+        <div id="help-others" className="grid gap-10 px-4 md:px-6 md:grid-cols-3">
             <Card className=" relative">
                 <CardHeader>
                     <div className="flex gap-5">Upload Data   </div>
