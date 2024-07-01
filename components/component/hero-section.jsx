@@ -1,7 +1,22 @@
+"use client"
 import Image from "next/image";
 import heroimage from "../../public/heroimage.svg"
-import Link from "next/link"
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import { Input } from "../ui/input";
+import { FloatingLabelInput } from "../ui/floating-label-input";
 export function HeroSection() {
+  const searchParams = useSearchParams()
+  const pathName = usePathname()
+  const { replace } = useRouter()
+  function handleSearch(term) {
+    const params = new URLSearchParams(searchParams)
+    if (term) {
+      params.set("query", term)
+    } else {
+      params.delete('query')
+    }
+    replace(`${pathName}?${params.toString()}`)
+  }
   return (
     (<section className="w-full py-12 md:py-24 lg:py-32">
       <div
@@ -10,15 +25,10 @@ export function HeroSection() {
           <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Get Your Question Papers</h1>
           <p
             className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            Chai & Study is your one-stop solution for accessing previous year question papers. Ace your exams with
+            <span className="text-purple-500"> Chai & Study</span> is your one-stop solution for accessing previous year question papers. Ace your exams with
             our comprehensive collection of curated papers.
           </p>
-          <Link
-            href="#"
-            className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-            prefetch={false}>
-            Explore Papers
-          </Link>
+          <FloatingLabelInput id="search" label="search" defaultValue={searchParams.get("query")?.toString() || ""} onChange={(e) => { handleSearch(e.target.value) }} />
         </div>
         <Image src={heroimage} alt="hero image" />
       </div>
