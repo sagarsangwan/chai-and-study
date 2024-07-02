@@ -17,15 +17,17 @@ model Course {
 }
 
 model QuestionPaper {
-  id          String    @id
-  name        String    @unique
+  id          String     @id
+  name        String     @unique
   description String?
   uploaderId  String?
-  views       Int       @default(0)
+  views       Int        @default(0)
   year        String?
   link        String?
-  Uploader    Uploader? @relation(fields: [uploaderId], references: [id])
+  Uploader    Uploader?  @relation(fields: [uploaderId], references: [id])
+  uploadedBy  UploadedBy @default(admin)
   Subject     Subject[]
+  published   Boolean    @default(false)
 }
 
 model Stream {
@@ -44,7 +46,8 @@ model Subject {
   year          String?
   Course        Course[]
   QuestionPaper QuestionPaper[]
-  Stream        Stream[]        @relation("SubjectStream")
+
+  Stream Stream[] @relation("SubjectStream")
 }
 
 model Uploader {
@@ -52,4 +55,9 @@ model Uploader {
   name          String
   email         String          @unique
   QuestionPaper QuestionPaper[]
+}
+
+enum UploadedBy {
+  user
+  admin
 }
