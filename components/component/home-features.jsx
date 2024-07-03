@@ -9,28 +9,24 @@ import {
 } from "@/components/ui/card"
 import {
     Dialog,
-    DialogClose,
     DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { UploadIcon } from "lucide-react"
 import Link from "next/link"
-import { useState } from "react"
+import { useTheme } from 'next-themes';
 import { Button } from "../ui/button"
 import toast from "react-hot-toast"
 function HomeFeatures() {
-    const [open, setOpen] = useState(false);
+    const { theme } = useTheme();
     function showComingSoonToast() {
         return (
             toast("coming soon")
         )
     }
     return (
-        <div id="help-others" className="grid gap-10 px-4 md:px-6 md:grid-cols-3">
+        <div id="help-others" className={`grid gap-10 md:px-10 md:grid-cols-3 px-4 py-5 md:py-10 ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-400'
+            }`}>
             <Card className=" relative">
                 <CardHeader>
                     <div className="flex gap-5">Upload Data   </div>

@@ -84,7 +84,6 @@ export default function UploadQuestionForm({ allSubjects }) {
 
         setLoading(true)
         try {
-
             setLoading(true)
             const formData = new FormData();
             formData.append("questionPaper", data.questionPaper[0]);
