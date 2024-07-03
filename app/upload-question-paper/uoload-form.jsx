@@ -23,6 +23,9 @@ import {
 import { Input } from "@/components/ui/input"
 import { AddNewQuestionPaper } from "./actions"
 import UploadToDrive from "../api/upload-question-paper/upload-to-drive"
+import { useState } from "react"
+import FullPageLoading from "@/components/component/FullPageLoading"
+import toast from "react-hot-toast"
 
 const MAX_UPLOAD_SIZE = 3 * 1024 * 1024
 const ACCEPTED_FILE_TYPES = ['application/pdf', 'application/x-pdf', 'application/acrobat', 'applications/vnd.pdf', 'text/pdf', 'text/x-pdf']
@@ -39,7 +42,7 @@ const FormSchema = z.object({
         message: "Enter a valid email",
     }),
     questionPaper: z.any().refine((file) => {
-        console.log(file)
+
         if (file.length < 1) return false
         if (file[0].size > MAX_UPLOAD_SIZE) return false
         if (!ACCEPTED_FILE_TYPES.includes(file[0].type)) return false
@@ -65,130 +68,151 @@ const FormSchema = z.object({
 
 })
 export default function UploadQuestionForm({ allSubjects }) {
+    const [loading, setLoading] = useState(false)
     const form = useForm({
         resolver: zodResolver(FormSchema),
         defaultValues: {
             userName: "sagar",
             email: "i@g.com",
-            subject: "Analysis & Design of Algorithms",
+            subject: "",
             questionPaper: undefined,
             year: "2022"
         },
     })
 
     const OnSubmit = async (data) => {
+
+        setLoading(true)
         try {
+
+            setLoading(true)
             const formData = new FormData();
             formData.append("questionPaper", data.questionPaper[0]);
-            // const response = await fetch('http://localhost:5000/upload', {
+            formData.append("year", data.year)
+            formData.append("userName", data.userName)
+            formData.append("email", data.email)
+            const [subjectId, subjectName] = data.subject.split('+');
+            formData.append("subjectName", subjectName)
+            formData.append("subjectId", subjectId)
             const response = await fetch('/api/upload-question-paper', {
 
                 method: 'POST',
                 body: formData,
             });
 
-            if (!response.ok) {
-                throw new Error('Failed to upload file');
+            const result = await response.json();
+            if (result.status === 200) {
+                toast.success(result.message)
+                setLoading(false)
+                form.reset()
+            }
+            if (result.status === 500) {
+                toast.error(result.message)
+                setLoading(false)
             }
 
-            const result = await response.json();
-            console.log('File uploaded successfully:', result);
-            // Handle result, e.g., update UI with view link
+
+
         } catch (error) {
-            console.error('Error uploading file:', error);
-            // Handle error, e.g., show error message to user
+            toast("upload successful")
+            setLoading(false)
+        } finally {
+            setLoading(false)
         }
     }
     const fileRef = form.register("questionPaper");
     return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(OnSubmit)} className=" space-y-6">
-                <FormDescription>
-                    Upload a question paper
-                </FormDescription>
-                <FormField
-                    control={form.control}
-                    name="userName"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Your Name</FormLabel>
-                            <FormControl>
-                                <Input id="userName" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Email</FormLabel>
-                            <FormControl>
-                                {/* <FloatingLabelInput id="email" {...field} label="Email" /> */}
-                                <Input id="email" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
+        <div>
+            {loading ? <FullPageLoading /> :
+                <Form {...form}>
+                    <form onSubmit={form.handleSubmit(OnSubmit)} className=" space-y-6">
+                        <FormDescription>
+                            Upload a question paper
+                        </FormDescription>
+                        <FormField
+                            control={form.control}
+                            name="userName"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Your Name</FormLabel>
+                                    <FormControl>
+                                        <Input id="userName" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="email"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Email</FormLabel>
+                                    <FormControl>
+                                        {/* <FloatingLabelInput id="email" {...field} label="Email" /> */}
+                                        <Input id="email" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
 
-                <FormField
-                    control={form.control}
-                    name="subject"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Select a subject</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                <FormControl>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select subject" />
-                                    </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                    {allSubjects.map((subject) => (
+                        <FormField
+                            control={form.control}
+                            name="subject"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Select a subject</FormLabel>
+                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select subject" />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            {allSubjects.map((subject) => (
 
-                                        <SelectItem key={subject.id} value={subject.id}>{subject.name}</SelectItem>
-                                    ))}
+                                                <SelectItem key={subject.id} value={`${subject.id}+${subject.name}`}>{subject.name}</SelectItem>
+                                            ))}
 
-                                </SelectContent>
-                            </Select>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="questionPaper"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Upload PDF </FormLabel>
-                            <FormControl>
-                                <Input id="questionPaper" type="file" {...fileRef} />
-                            </FormControl>
+                                        </SelectContent>
+                                    </Select>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="questionPaper"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Upload PDF </FormLabel>
+                                    <FormControl>
+                                        <Input id="questionPaper" type="file" {...fileRef} />
+                                    </FormControl>
 
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="year"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Year of paper</FormLabel>
-                            <FormControl>
-                                {/* <FloatingLabelInput id="year" {...field} label="year" /> */}
-                                <Input id="year" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="year"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Year of paper</FormLabel>
+                                    <FormControl>
+                                        {/* <FloatingLabelInput id="year" {...field} label="year" /> */}
+                                        <Input id="year" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
 
-                <Button type="submit">Submit</Button>
-            </form>
-        </Form>
+                        <Button type="submit">Submit</Button>
+                    </form>
+                </Form>}
+        </div>
     )
 }

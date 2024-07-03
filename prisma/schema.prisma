@@ -9,7 +9,7 @@ datasource db {
 }
 
 model Course {
-  id          String    @id
+  id          String    @id @default(cuid())
   name        String    @unique
   description String?
   Stream      Stream[]  @relation("CourseStream")
@@ -17,13 +17,13 @@ model Course {
 }
 
 model QuestionPaper {
-  id          String     @id
+  id          String     @id @default(cuid())
   name        String     @unique
   description String?
   uploaderId  String?
   views       Int        @default(0)
-  year        String?
-  link        String?
+  year        String
+  link        String
   Uploader    Uploader?  @relation(fields: [uploaderId], references: [id])
   uploadedBy  UploadedBy @default(admin)
   Subject     Subject[]
@@ -31,7 +31,7 @@ model QuestionPaper {
 }
 
 model Stream {
-  id          String    @id
+  id          String    @id @default(cuid())
   name        String    @unique
   description String?
   Course      Course[]  @relation("CourseStream")
@@ -39,7 +39,7 @@ model Stream {
 }
 
 model Subject {
-  id            String          @id
+  id            String          @id @default(cuid())
   name          String          @unique
   description   String?
   credits       Int?
@@ -51,7 +51,7 @@ model Subject {
 }
 
 model Uploader {
-  id            String          @id
+  id            String          @id @default(cuid())
   name          String
   email         String          @unique
   QuestionPaper QuestionPaper[]
