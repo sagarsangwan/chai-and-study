@@ -2,9 +2,11 @@
 import Image from "next/image";
 import heroimage from "../../public/heroimage.svg"
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
-import { Input } from "../ui/input";
 import { FloatingLabelInput } from "../ui/floating-label-input";
+import SearchResults from "./SearchResults";
+import { useState } from "react";
 export function HeroSection() {
+  const [query, setQuery] = useState("")
   const searchParams = useSearchParams()
   const pathName = usePathname()
   const { replace } = useRouter()
@@ -32,6 +34,7 @@ export function HeroSection() {
         </div>
         <Image src={heroimage} alt="hero image" />
       </div>
+      {/* <SearchResults query={ */}
     </section>)
   );
 }

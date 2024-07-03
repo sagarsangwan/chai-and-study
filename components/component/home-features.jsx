@@ -25,7 +25,7 @@ function HomeFeatures() {
         )
     }
     return (
-        <div id="help-others" className={`grid gap-10 md:px-10 md:grid-cols-3 px-4 py-5 md:py-10 ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-400'
+        <div id="help-others" className={` w-full grid gap-10 md:px-10 md:grid-cols-3 px-4 py-5 md:py-10 ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-400'
             }`}>
             <Card className=" relative">
                 <CardHeader>

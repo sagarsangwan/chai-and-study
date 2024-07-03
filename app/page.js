@@ -18,7 +18,7 @@ export default async function Home() {
           allCourses.map((course) => (
 
             <Card key={course.id}
-              className="relative overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
+              className="relative shadow-2xl overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
               <Link href={`/streams/${course.id}`} className="absolute inset-0 z-10" prefetch={false}>
                 <span className="sr-only">View subject</span>
               </Link>
