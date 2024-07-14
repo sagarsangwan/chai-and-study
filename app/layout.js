@@ -28,14 +28,16 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    // site: '@site_account',
-    // creator: '@sagar sangwan',
+    url: 'https://chai-and-study.vercel.app/',
+    type: 'website',
     title: 'Chai & Study || Fuel up with chai and study',
     description: "Access previous years' question papers for various courses absolutely free and for mdu, pu, du etc.",
     images: [
       {
         url: '/heroimage.svg',
         alt: 'An image description',
+        width: 800,
+        height: 600,
       },
     ],
   },
