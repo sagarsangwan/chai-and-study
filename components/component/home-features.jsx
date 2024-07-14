@@ -10,14 +10,15 @@ import {
 import {
     Dialog,
     DialogContent,
-    DialogTrigger,
+    DialogTrigger, DialogTitle, DialogDescription, DialogHeader
 } from "@/components/ui/dialog"
 import { UploadIcon } from "lucide-react"
 import Link from "next/link"
 import { useTheme } from 'next-themes';
 import { Button } from "../ui/button"
 import toast from "react-hot-toast"
-function HomeFeatures() {
+import UploadQuestionForm from "./uoload-form"
+function HomeFeatures({ allSubjects }) {
     const { theme } = useTheme();
     function showComingSoonToast() {
         return (
@@ -38,27 +39,28 @@ function HomeFeatures() {
                     </CardDescription>
                 </CardContent>
                 <CardFooter>
-                    <Dialog>
+                    <Dialog className="min-h-[570px]">
                         <DialogTrigger asChild>
                             <Button className="w-full stretched-link" variant="" href="/upload">
                                 <UploadIcon />
                             </Button>
                         </DialogTrigger>
                         <DialogContent className="sm:max-w-md">
-                            {/* <DialogHeader>
-                                <DialogTitle>Share link</DialogTitle>
-                                <DialogDescription>
+                            <DialogHeader>
+                                <DialogTitle >Upload a question paper</DialogTitle>
+                                {/* <DialogDescription>
                                     What do you want to upload
-                                </DialogDescription>
-                            </DialogHeader> */}
-                            <div className="flex items-center space-x-2">
+                                </DialogDescription> */}
+                            </DialogHeader>
+                            <UploadQuestionForm allSubjects={allSubjects} />
+                            {/* <div className="flex items-center space-x-2">
                                 <div className="grid flex-1 gap-2">
                                     <Link href="/upload-question-paper" >Upload Question Paper</Link>
                                     <br />
                                     <Link href="" onClick={() => { showComingSoonToast() }} >Upload Study Material</Link>
                                 </div>
 
-                            </div>
+                            </div> */}
                             {/* <DialogFooter className="sm:justify-start">
                                 <DialogClose asChild>
                                     <Button type="button" variant="secondary">
@@ -75,7 +77,7 @@ function HomeFeatures() {
                 </CardFooter>
 
             </Card>
-            <Card>
+            {/* <Card>
                 <CardHeader>
                     <CardTitle>Feature 2</CardTitle>
                 </CardHeader>
@@ -100,7 +102,7 @@ function HomeFeatures() {
                     </CardDescription>
                 </CardContent>
 
-            </Card>
+            </Card> */}
         </div>
     )
 }

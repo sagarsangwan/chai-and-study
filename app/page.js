@@ -4,10 +4,11 @@ import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import prisma from "@/lib/prisma";
 import HomeFeatures from "@/components/component/home-features";
-
+import { getAllSubjectName } from "@/lib/actions"
 
 export default async function Home() {
   const allCourses = await prisma.Course.findMany()
+  const allSubjects = await getAllSubjectName()
   return (
     <div className="mb-96 ">
       <div>
@@ -42,7 +43,7 @@ export default async function Home() {
         }
       </div>
       <div className="mt-14">
-        <HomeFeatures />
+        <HomeFeatures allSubjects={allSubjects} />
       </div>
     </div>
   );
