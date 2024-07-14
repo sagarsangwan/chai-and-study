@@ -8,11 +8,13 @@ import Head from 'next/head';
 
 
 export const metadata = {
-  title: "Chai & Study  || previous years question papers, ptu previous year question papers, diploma question papers, mca question papers, mba question papers, bba question papers, bcom question papers, pseb 10 12 question papers",
-  description: "Download Previous Years Question Papers absolutely Free for PTU, PU, BFUHS, PSBTE, PSEB, GTU, HPTSB, MDU, BCOM, BBA, BCA, MBA, MCA, MCOM, Btech, MTech , BSc IT, MSc IT, PGDCA, DIPLOMA, 10th, 12, Distance Education",
+  metadataBase: new URL('https://chai-and-study.vercel.app/'),
+
+  title: "Chai & Study || Download Previous Years Question Papers for Various Courses",
+  description: "Access previous years question papers for various courses absolutely free and for mdu, pu, du etc.",
   openGraph: {
     title: 'Chai & Study || Fuel up with chai and study',
-    description: "Download Previous Years Question Papers absolutely Free for PTU, PU, BFUHS, PSBTE, PSEB, GTU, HPTSB, MDU, BCOM, BBA, BCA, MBA, MCA, MCOM, Btech, MTech , BSc IT, MSc IT, PGDCA, DIPLOMA, 10th, 12, Distance Education",
+    description: "Access previous years' question papers for various courses absolutely free and for mdu, pu, du etc.",
     url: 'https://chai-and-study.vercel.app/',
     type: 'website',
     images: [
@@ -29,7 +31,7 @@ export const metadata = {
     // site: '@site_account',
     // creator: '@sagar sangwan',
     title: 'Chai & Study || Fuel up with chai and study',
-    description: "Download Previous Years Question Papers absolutely Free for PTU, PU, BFUHS, PSBTE, PSEB, GTU, HPTSB, MDU, BCOM, BBA, BCA, MBA, MCA, MCOM, Btech, MTech , BSc IT, MSc IT, PGDCA, DIPLOMA, 10th, 12, Distance Education",
+    description: "Access previous years' question papers for various courses absolutely free and for mdu, pu, du etc.",
     images: [
       {
         url: '/heroimage.svg',
