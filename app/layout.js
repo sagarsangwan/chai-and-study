@@ -13,7 +13,7 @@ export const metadata = {
   openGraph: {
     title: 'Chai & Study || Fuel up with chai and study',
     description: "Download Previous Years Question Papers absolutely Free for PTU, PU, BFUHS, PSBTE, PSEB, GTU, HPTSB, MDU, BCOM, BBA, BCA, MBA, MCA, MCOM, Btech, MTech , BSc IT, MSc IT, PGDCA, DIPLOMA, 10th, 12, Distance Education",
-    url: 'https://mywebsite.com',
+    url: 'https://chai-and-study.vercel.app/',
     type: 'website',
     images: [
       {
