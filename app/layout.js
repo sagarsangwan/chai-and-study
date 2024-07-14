@@ -9,15 +9,15 @@ import Head from 'next/head';
 
 export const metadata = {
   title: "Chai & Study  || previous years question papers, ptu previous year question papers, diploma question papers, mca question papers, mba question papers, bba question papers, bcom question papers, pseb 10 12 question papers",
-  desription: "Download Previous Years Question Papers absolutely Free for PTU, PU, BFUHS, PSBTE, PSEB, GTU, HPTSB, MDU, BCOM, BBA, BCA, MBA, MCA, MCOM, Btech, MTech , BSc IT, MSc IT, PGDCA, DIPLOMA, 10th, 12, Distance Education",
+  description: "Download Previous Years Question Papers absolutely Free for PTU, PU, BFUHS, PSBTE, PSEB, GTU, HPTSB, MDU, BCOM, BBA, BCA, MBA, MCA, MCOM, Btech, MTech , BSc IT, MSc IT, PGDCA, DIPLOMA, 10th, 12, Distance Education",
   openGraph: {
     title: 'Chai & Study || Fuel up with chai and study',
-    desription: "Download Previous Years Question Papers absolutely Free for PTU, PU, BFUHS, PSBTE, PSEB, GTU, HPTSB, MDU, BCOM, BBA, BCA, MBA, MCA, MCOM, Btech, MTech , BSc IT, MSc IT, PGDCA, DIPLOMA, 10th, 12, Distance Education",
+    description: "Download Previous Years Question Papers absolutely Free for PTU, PU, BFUHS, PSBTE, PSEB, GTU, HPTSB, MDU, BCOM, BBA, BCA, MBA, MCA, MCOM, Btech, MTech , BSc IT, MSc IT, PGDCA, DIPLOMA, 10th, 12, Distance Education",
     url: 'https://mywebsite.com',
     type: 'website',
     images: [
       {
-        url: 'public/heroimage.svg',  // Path to your image in the public directory
+        url: '/heroimage.svg',
         width: 800,
         height: 600,
         alt: 'Hero image',
@@ -29,10 +29,10 @@ export const metadata = {
     // site: '@site_account',
     // creator: '@sagar sangwan',
     title: 'Chai & Study || Fuel up with chai and study',
-    desription: "Download Previous Years Question Papers absolutely Free for PTU, PU, BFUHS, PSBTE, PSEB, GTU, HPTSB, MDU, BCOM, BBA, BCA, MBA, MCA, MCOM, Btech, MTech , BSc IT, MSc IT, PGDCA, DIPLOMA, 10th, 12, Distance Education",
+    description: "Download Previous Years Question Papers absolutely Free for PTU, PU, BFUHS, PSBTE, PSEB, GTU, HPTSB, MDU, BCOM, BBA, BCA, MBA, MCA, MCOM, Btech, MTech , BSc IT, MSc IT, PGDCA, DIPLOMA, 10th, 12, Distance Education",
     images: [
       {
-        url: 'public/heroimage.svg',  // Path to your image in the public directory
+        url: '/heroimage.svg',
         alt: 'An image description',
       },
     ],
@@ -59,6 +59,14 @@ export default function RootLayout({ children }) {
         <meta name="twitter:title" content={metadata.twitter.title} />
         <meta name="twitter:description" content={metadata.twitter.description} />
         <meta name="twitter:image" content={metadata.twitter.images[0].url} />
+        {/* Microsoft Clarity Script */}
+        <script type="text/javascript">
+          {`(function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "n7favdt468");`}
+        </script>
       </Head>
       <body className={inter.className}>
         <Providers>
