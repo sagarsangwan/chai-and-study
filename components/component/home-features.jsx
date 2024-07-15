@@ -48,9 +48,8 @@ function HomeFeatures({ allSubjects }) {
                         <DialogContent className="sm:max-w-md">
                             <DialogHeader>
                                 <DialogTitle >Upload a question paper</DialogTitle>
-                                {/* <DialogDescription>
-                                    What do you want to upload
-                                </DialogDescription> */}
+                                <DialogDescription>
+                                </DialogDescription>
                             </DialogHeader>
                             <UploadQuestionForm allSubjects={allSubjects} />
                             {/* <div className="flex items-center space-x-2">

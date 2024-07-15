@@ -1,24 +1,19 @@
 "use client"
 import Image from "next/image";
 import heroimage from "../../public/heroimage.svg"
-import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FloatingLabelInput } from "../ui/floating-label-input";
-import SearchResults from "./SearchResults";
-import { useState } from "react";
+import { Button } from "../ui/button";
+import { SearchIcon } from "lucide-react";
 export function HeroSection() {
-  const [query, setQuery] = useState("")
-  const searchParams = useSearchParams()
-  const pathName = usePathname()
-  const { replace } = useRouter()
-  function handleSearch(term) {
-    const params = new URLSearchParams(searchParams)
-    if (term) {
-      params.set("query", term)
-    } else {
-      params.delete('query')
-    }
-    replace(`${pathName}?${params.toString()}`)
-  }
+  const router = useRouter()
+  function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const query = formData.get("search")
+    return router.push(`/search-results?query=${query}`)
+
+  };
   return (
     (<section className="w-full py-12 md:py-24 lg:py-32">
       <div
@@ -30,11 +25,16 @@ export function HeroSection() {
             <span className="text-purple-500"> Chai & Study</span> is your one-stop solution for accessing previous year question papers. Ace your exams with
             our comprehensive collection of curated papers.
           </p>
-          <FloatingLabelInput id="search" label="search" defaultValue={searchParams.get("query")?.toString() || ""} onChange={(e) => { handleSearch(e.target.value) }} />
+          <form onSubmit={handleSubmit}>
+            <div className="relative">
+              <FloatingLabelInput className=" absolute" id="search" label="search" name="search" />
+              <Button type="submit" className="absolute right-0"> <SearchIcon /> </Button>
+            </div>
+          </form>
         </div>
-        <Image src={heroimage} alt="hero image" />
+        <Image src={heroimage} priority alt="hero image" />
       </div>
-      {/* <SearchResults query={ */}
+
     </section>)
   );
 }
