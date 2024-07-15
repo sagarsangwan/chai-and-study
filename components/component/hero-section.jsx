@@ -28,7 +28,7 @@ export function HeroSection() {
           <form onSubmit={handleSubmit}>
             <div className="relative">
               <FloatingLabelInput className=" absolute" id="search" label="search" name="search" />
-              <Button type="submit" className="absolute right-0"> <SearchIcon /> </Button>
+              <Button type="submit" className="absolute right-0" > <SearchIcon /> </Button>
             </div>
           </form>
         </div>
