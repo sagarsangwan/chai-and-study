@@ -73,7 +73,7 @@ export default function RootLayout({ children }) {
           <main className="container">
             {children}
             {process.env.NODE_ENV === 'production' && (
-              <Script id="clarity-script" strategy="afterInteractive">
+              <Script id="clarity_script_script" strategy="afterInteractive">
                 {`
             (function(c,l,a,r,i,t,y){
                 c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};

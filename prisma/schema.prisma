@@ -28,6 +28,7 @@ model QuestionPaper {
   uploadedBy  UploadedBy @default(admin)
   Subject     Subject[]
   published   Boolean    @default(false)
+  uploadedAt  DateTime   @default(now())
 }
 
 model Stream {

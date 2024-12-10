@@ -7,39 +7,47 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import moment from "moment"
-import { getallUploader } from "./admin-action"
+import { getAllUploadedPaper } from "./admin-action"
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
 async function UploaderPaper() {
-    const allUploader = await getallUploader()
+    const allUploadedPaper = await getAllUploadedPaper()
     return (
         <div>
             <Table>
                 {/* <TableCaption>List of all uploaders.</TableCaption> */}
                 <TableHeader>
                     <TableRow>
-                        <TableHead >Subject</TableHead>
+                        <TableHead >Paper Name</TableHead>
                         <TableHead>Uploader Name</TableHead>
                         <TableHead>Email</TableHead>
-                        <TableHead >description</TableHead>
-                        <TableHead >year</TableHead>
-                        <TableHead >link</TableHead>
-                        <TableHead >published</TableHead>
+                        <TableHead >Description</TableHead>
+                        <TableHead >Year</TableHead>
+                        <TableHead >Link</TableHead>
+                        <TableHead >Published</TableHead>
                         {/* <TableHead>createdAt</TableHead> */}
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {allUploader.map(uploader => (
-                        <TableRow key={uploader.id}>
-                            <TableCell >{uploader.name}</TableCell>
-                            <TableCell>{uploader.Uploader.name}</TableCell>
-                            <TableCell>{uploader.Uploader.email}</TableCell>
-                            <TableCell >{uploader.description}</TableCell>
-                            <TableCell >{uploader.year}</TableCell>
+                    {allUploadedPaper.map(questionPaper => (
+                        // console.log(questionPaper)
+                        <TableRow key={questionPaper.id}>
+                            <TableCell >{questionPaper.name}</TableCell>
+                            <TableCell>{questionPaper.Uploader.name}</TableCell>
+                            <TableCell>{questionPaper.Uploader.email}</TableCell>
+                            <TableCell >{questionPaper.description}</TableCell>
+                            <TableCell >{questionPaper.year}</TableCell>
                             <TableCell >
-                                <a href={uploader.link}>View here</a>
+                                <Link className="" href={questionPaper.link}>
+                                    <Button>
+                                        View here
+                                    </Button>
+                                </Link>
                             </TableCell>
-                            <TableCell >{uploader.published}</TableCell>
+                            <TableCell >{questionPaper.published ? "Published" : "not publishe"}
+
+                            </TableCell>
                             {/* <TableCell>   {moment(uploader.createdAt.toISOString()).fromNow()}  </TableCell> */}
                         </TableRow>
                     ))}

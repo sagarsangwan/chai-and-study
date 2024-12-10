@@ -1,8 +1,8 @@
 "use server"
 import prisma from "@/lib/prisma";
 import { cookies } from "next/headers";
-export async function getallUploader() {
-    const allUploader = await prisma.QuestionPaper.findMany({
+export async function getAllUploadedPaper() {
+    const allUploadedPaper = await prisma.QuestionPaper.findMany({
         where: {
             uploadedBy: {
                 not: "admin",
@@ -13,8 +13,11 @@ export async function getallUploader() {
         }
 
     })
-    return allUploader
+    console.log(allUploadedPaper)
+    return allUploadedPaper
 }
+
+// export async function Update
 
 export async function isLoggedInOrNot() {
     const cookieStore = cookies()
